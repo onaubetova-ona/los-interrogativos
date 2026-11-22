@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="riso">
+  <title>Los interrogativos — Práctica interactiva de español (A1–A2)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #f7f3ea;
+      --surface-container-low: #ffffff;
+      --surface-container: #efe8d8;
+      --surface-container-high: #fff8b3;
+
+      /* Ink */
+      --on-surface: #1d2a5a;
+      --on-surface-variant: #3d4775;
+
+      /* Rules */
+      --outline: #1d2a5a;
+      --outline-variant: #c3c6d9;
+
+      /* Accents */
+      --primary: #006aa8;
+      --on-primary: #ffffff;
+      --primary-container: #ffe800;
+      --on-primary-container: #1d2a5a;
+      --secondary: #ff52b4;
+      --tertiary: #d00074;
+      --error: #c0262d;
+      --on-error: #ffffff;
+      --error-container: #fde8e8;
+
+      /* Semantic */
+      --positive: #0d6e43;
+      --on-positive: #ffffff;
+      --positive-container: #e7f7ef;
+      --warning: #9a4d00;
+      --warning-container: #fff4db;
+      --selection-bg: #dceeff;
+
+      /* Data series */
+      --data-1: #0078bf;
+      --data-2: #d00074;
+      --data-3: #1d2a5a;
+      --data-4: #d9531e;
+      --data-context: #b4b8cc;
+
+      /* Fonts */
+      --font-headline: 'Archivo', sans-serif;
+      --font-body: 'Work Sans', sans-serif;
+      --font-label: 'Space Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.5rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --misregister: 3px 2px 0 rgb(255 82 180 / 0.85);
+      --ink-border: 2px solid var(--outline);
+      --hairline-border: 1px solid var(--outline-variant);
+      --offset-pink: 5px 5px 0 var(--secondary);
+      --offset-blue: 5px 5px 0 var(--primary);
+      --offset-sm: 3px 3px 0 var(--primary);
+      --offset-sm-pink: 3px 3px 0 var(--secondary);
+      --offset-pressed: 1px 1px 0 var(--primary);
+      --halftone: radial-gradient(rgb(29 42 90 / 0.07) 1px, transparent 1.2px);
+      --halftone-size: 6px 6px;
+
+      /* Focus ring */
+      --focus: #006aa8;
+
+      /* Type scale (Focused Tool) */
+      --display-size:  clamp(1.85rem, 1.4rem + 1.8vw, 2.75rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+      --subhead-size:  clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size:     clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size:    0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: clip; margin: 0; padding: 0; }
+    header { position: static !important; }
+
+    body {
+      background-color: var(--background);
+      background-image: var(--halftone);
+      background-size: var(--halftone-size);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding: var(--space-lg);
+      max-width: 1080px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Typography */
+    .misregister {
+      font-family: var(--font-headline);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+      color: var(--primary);
+      text-shadow: var(--misregister);
+      margin: 0;
+    }
+
+    .display-title {
+      font-size: var(--display-size);
+    }
+
+    .section-title {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--headline-size);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .lede {
+      font-size: var(--subhead-size);
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+      margin: var(--space-sm) 0 0 0;
+    }
+
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--primary);
+      color: var(--on-primary);
+      border-radius: var(--rounded-full);
+      padding: var(--space-xs) var(--space-sm);
+      white-space: nowrap;
+    }
+
+    .stamp-yellow {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border: var(--ink-border);
+    }
+
+    .stamp-outline {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: var(--ink-border);
+    }
+
+    /* Ink blocks */
+    .ink-block {
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--offset-pink);
+      padding: var(--space-lg);
+      container-type: inline-size;
+    }
+
+    .ink-block.offset-blue {
+      box-shadow: var(--offset-blue);
+    }
+
+    .ink-block.yellow-stock {
+      background: var(--surface-container-high);
+      box-shadow: var(--offset-blue);
+    }
+
+    /* Hero header */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--ink-border);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Progress & Score Strip */
+    .tracker-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+    }
+
+    .tracker-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .label-mono {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .tabular-num {
+      font-family: var(--font-headline);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 18px;
+      background: var(--surface-container);
+      border: var(--ink-border);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    .score-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .mini-tile {
+      background: var(--background);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      padding: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .mini-tile .mini-val {
+      font-family: var(--font-headline);
+      font-weight: 900;
+      font-size: var(--subhead-size);
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+    }
+
+    .mini-tile.is-complete {
+      background: var(--positive-container);
+    }
+
+    .tracker-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: var(--hairline-border);
+    }
+
+    .jump-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: var(--rounded);
+      border: var(--ink-border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out),
+                  background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: var(--on-surface);
+      box-shadow: var(--offset-sm);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translate(1px, 1px);
+      box-shadow: var(--offset-pressed);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      box-shadow: var(--offset-sm);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      transform: translate(1px, 1px);
+      box-shadow: var(--offset-pressed);
+    }
+
+    .btn-ghost {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+    }
+
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--surface-container);
+    }
+
+    .btn-danger-armed {
+      background: var(--error);
+      color: var(--on-error);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-sm {
+      min-height: 36px;
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    /* Exercise section header */
+    .exercise-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--ink-border);
+      margin-bottom: var(--space-lg);
+    }
+
+    .exercise-title-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-xs);
+    }
+
+    .exercise-desc {
+      margin: var(--space-xs) 0 0 0;
+      color: var(--on-surface-variant);
+      max-width: 65ch;
+    }
+
+    /* Exercise 1: Matching */
+    .match-board {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .match-column {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .match-col-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      padding-bottom: var(--space-xs);
+      border-bottom: var(--hairline-border);
+    }
+
+    .match-item-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .match-card {
+      width: 100%;
+      min-height: 52px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .match-card:hover {
+      background: var(--background);
+    }
+
+    .match-card.is-selected {
+      background: var(--primary-container);
+      box-shadow: var(--offset-sm);
+      transform: translate(-1px, -1px);
+    }
+
+    .match-card.is-paired {
+      background: var(--selection-bg);
+    }
+
+    .match-card.is-correct {
+      background: var(--positive-container);
+      box-shadow: 0 0 0 2px var(--positive);
+    }
+
+    .match-card.is-incorrect {
+      background: var(--error-container);
+      box-shadow: 0 0 0 2px var(--error);
+    }
+
+    .match-card.is-unanswered {
+      background: var(--warning-container);
+      box-shadow: 0 0 0 2px var(--warning);
+    }
+
+    .match-q-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .match-q-word {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--subhead-size);
+      color: var(--on-surface);
+    }
+
+    .match-assigned-text {
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .match-badge {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded-full);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      border: 1px solid var(--outline);
+      flex-shrink: 0;
+    }
+
+    .match-badge.badge-paired {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .match-clear-btn {
+      align-self: flex-end;
+      min-height: 32px;
+      padding: 2px var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      background: transparent;
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      cursor: pointer;
+    }
+
+    .match-clear-btn:hover {
+      background: var(--surface-container);
+    }
+
+    .match-status-note {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      border: var(--hairline-border);
+      border-radius: var(--rounded);
+    }
+
+    /* Exercise 2: Fill in the blanks */
+    .tilde-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-lg);
+    }
+
+    .tilde-btn {
+      min-width: 44px;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--subhead-size);
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--outline);
+    }
+
+    .tilde-btn:hover {
+      background: var(--primary-container);
+    }
+
+    .tilde-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    }
+
+    .dialogue-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+    }
+
+    .dialogue-card {
+      padding: var(--space-md);
+      background: var(--background);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .dialogue-card.state-correct {
+      background: var(--positive-container);
+    }
+
+    .dialogue-card.state-warning {
+      background: var(--warning-container);
+    }
+
+    .dialogue-card.state-error {
+      background: var(--error-container);
+    }
+
+    .dialogue-label {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+    }
+
+    .dialogue-lines {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .dialogue-line {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .speaker-tag {
+      font-family: var(--font-label);
+      font-weight: 700;
+      color: var(--primary);
+      margin-right: var(--space-xs);
+    }
+
+    .blank-input {
+      display: inline-block;
+      width: 11.5rem;
+      max-width: 100%;
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-sm);
+      margin: 0 var(--space-xs);
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--on-surface);
+      vertical-align: middle;
+    }
+
+    .blank-input:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 1px;
+      box-shadow: var(--offset-sm);
+    }
+
+    /* Exercise 3: Multiple Choice */
+    .mc-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+    }
+
+    .mc-card {
+      padding: var(--space-md);
+      background: var(--background);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .mc-card.state-correct {
+      background: var(--positive-container);
+    }
+
+    .mc-card.state-error {
+      background: var(--error-container);
+    }
+
+    .mc-card.state-warning {
+      background: var(--warning-container);
+    }
+
+    .mc-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .mc-question {
+      margin: 0;
+      font-weight: 600;
+      font-size: var(--subhead-size);
+    }
+
+    .mc-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .mc-option-btn {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded-full);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .mc-option-btn:hover {
+      background: var(--surface-container);
+    }
+
+    .mc-option-btn.is-chosen {
+      background: var(--primary);
+      color: var(--on-primary);
+      box-shadow: var(--offset-sm-pink);
+    }
+
+    .mc-option-btn.is-correct-choice {
+      background: var(--positive);
+      color: var(--on-positive);
+      border-color: var(--positive);
+    }
+
+    .mc-option-btn.is-wrong-choice {
+      background: var(--error);
+      color: var(--on-error);
+      border-color: var(--error);
+    }
+
+    /* Hints and Feedback */
+    .hint-box {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border-left: 4px solid var(--primary);
+      background: var(--surface-container-low);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .hint-box.hint-positive {
+      border-left-color: var(--positive);
+      color: var(--on-surface);
+    }
+
+    .hint-box.hint-warning {
+      border-left-color: var(--warning);
+      color: var(--on-surface);
+    }
+
+    .hint-box.hint-error {
+      border-left-color: var(--error);
+      color: var(--on-surface);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded-full);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .status-pill.pill-ok {
+      background: var(--positive);
+      color: var(--on-positive);
+    }
+
+    .status-pill.pill-err {
+      background: var(--error);
+      color: var(--on-error);
+    }
+
+    .status-pill.pill-warn {
+      background: var(--warning);
+      color: var(--on-primary);
+    }
+
+    /* Exercise footer */
+    .exercise-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: var(--ink-border);
+    }
+
+    .exercise-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .result-banner {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--ink-border);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 600;
+    }
+
+    .result-banner.is-perfect {
+      background: var(--positive-container);
+    }
+
+    /* Summary chart block */
+    .summary-bars {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 11rem minmax(0, 1fr) 4.5rem;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .bar-track {
+      height: 22px;
+      background: var(--surface-container-low);
+      border: var(--ink-border);
+      border-radius: var(--rounded);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0%;
+      transition: width var(--dur-long) var(--ease-out);
+    }
+
+    .bar-fill.series-1 { background: var(--data-1); }
+    .bar-fill.series-2 { background: var(--data-2); }
+    .bar-fill.series-3 { background: var(--data-3); }
+
+    /* Container queries & mobile breakpoint */
+    @container (max-width: 680px) {
+      .tracker-top {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .match-board {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .bar-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-xs);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-lg);
+      }
+      .ink-block {
+        padding: var(--space-md);
+      }
+      .score-tiles {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-grid">
+    <!-- Encabezado principal -->
+    <header class="hero">
+      <div class="hero-meta">
+        <span class="stamp">Español · Nivel A1–A2</span>
+        <span class="stamp stamp-yellow">3 ejercicios interactivos</span>
+      </div>
+      <h1 class="misregister display-title">Los interrogativos</h1>
+      <p class="lede">
+        Practica las palabras para hacer preguntas en español: <strong>quién, qué, cómo, cuándo, dónde, cuánto, cuál/cuáles, por qué y para qué</strong>. Completa los tres ejercicios y comprueba tus respuestas para ver pistas personalizadas.
+      </p>
+    </header>
+
+    <!-- Panel de progreso global -->
+    <section class="ink-block offset-blue tracker-panel" aria-label="Progreso general">
+      <div class="tracker-top">
+        <div>
+          <div class="progress-header">
+            <span class="label-mono">Progreso de práctica</span>
+            <span id="global-progress-text" class="tabular-num">0 / 27 respondidas</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="27" aria-valuenow="0" id="global-progress-bar">
+            <div class="progress-fill" id="global-progress-fill"></div>
+          </div>
+        </div>
+        <div class="score-tiles">
+          <div class="mini-tile" id="tile-ex1">
+            <span class="label-mono">Ej. 1 · Relacionar</span>
+            <span class="mini-val" id="tile-ex1-val">Sin comprobar</span>
+          </div>
+          <div class="mini-tile" id="tile-ex2">
+            <span class="label-mono">Ej. 2 · Completar</span>
+            <span class="mini-val" id="tile-ex2-val">Sin comprobar</span>
+          </div>
+          <div class="mini-tile" id="tile-ex3">
+            <span class="label-mono">Ej. 3 · Múltiple</span>
+            <span class="mini-val" id="tile-ex3-val">Sin comprobar</span>
+          </div>
+        </div>
+      </div>
+      <div class="tracker-actions">
+        <nav class="jump-links" aria-label="Navegación entre ejercicios">
+          <a class="btn btn-ghost btn-sm" href="#ejercicio-1">1. Relacionar</a>
+          <a class="btn btn-ghost btn-sm" href="#ejercicio-2">2. Completar frases</a>
+          <a class="btn btn-ghost btn-sm" href="#ejercicio-3">3. Elección múltiple</a>
+        </nav>
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-all" onclick="handleResetAll(this)">
+          Reiniciar todo
+        </button>
+      </div>
+    </section>
+
+    <!-- EJERCICIO 1: Relacionar -->
+    <section id="ejercicio-1" class="ink-block" aria-labelledby="title-ex1">
+      <div class="exercise-head">
+        <div class="exercise-title-group">
+          <span class="stamp">Ejercicio 1 de 3 · 9 puntos</span>
+          <h2 id="title-ex1" class="section-title">Relacionar preguntas y respuestas</h2>
+          <p class="exercise-desc">
+            Une cada interrogativo de la columna izquierda con su respuesta típica en la columna derecha. Haz clic en una pregunta y luego en su respuesta.
+          </p>
+        </div>
+        <span class="stamp stamp-outline" id="ex1-count-badge">0 / 9 unidas</span>
+      </div>
+
+      <div id="ex1-selection-guide" class="match-status-note" aria-live="polite">
+        Paso 1: Selecciona un interrogativo de la izquierda o una respuesta de la derecha para empezar a unirlos.
+      </div>
+
+      <div class="match-board">
+        <div class="match-column">
+          <div class="match-col-label">Interrogativos</div>
+          <div id="ex1-left-col" class="match-column"></div>
+        </div>
+        <div class="match-column">
+          <div class="match-col-label">Respuestas posibles</div>
+          <div id="ex1-right-col" class="match-column"></div>
+        </div>
+      </div>
+
+      <div class="exercise-footer">
+        <div class="exercise-controls">
+          <button type="button" class="btn btn-primary" onclick="checkExercise1()">Comprobar Ejercicio 1</button>
+          <button type="button" class="btn btn-secondary" id="ex1-retry-wrong" onclick="retryWrongExercise1()" hidden>Reintentar fallos</button>
+          <button type="button" class="btn btn-ghost" onclick="resetExercise1()">Reiniciar ejercicio</button>
+        </div>
+        <div id="ex1-result" class="result-banner" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- EJERCICIO 2: Completar frases -->
+    <section id="ejercicio-2" class="ink-block yellow-stock" aria-labelledby="title-ex2">
+      <div class="exercise-head">
+        <div class="exercise-title-group">
+          <span class="stamp">Ejercicio 2 de 3 · 9 puntos</span>
+          <h2 id="title-ex2" class="section-title">Completar frases en diálogos</h2>
+          <p class="exercise-desc">
+            Escribe el interrogativo adecuado para completar cada diálogo cotidiano. Recuerda que los interrogativos siempre llevan tilde.
+          </p>
+        </div>
+        <span class="stamp stamp-outline" id="ex2-count-badge">0 / 9 completadas</span>
+      </div>
+
+      <div class="tilde-toolbar" role="toolbar" aria-label="Insertar vocales con tilde">
+        <span class="label-mono">Insertar tilde en el espacio activo:</span>
+        <button type="button" class="tilde-btn" onmousedown="event.preventDefault()" onclick="insertAccent('á')" aria-label="Insertar á">á</button>
+        <button type="button" class="tilde-btn" onmousedown="event.preventDefault()" onclick="insertAccent('é')" aria-label="Insertar é">é</button>
+        <button type="button" class="tilde-btn" onmousedown="event.preventDefault()" onclick="insertAccent('í')" aria-label="Insertar í">í</button>
+        <button type="button" class="tilde-btn" onmousedown="event.preventDefault()" onclick="insertAccent('ó')" aria-label="Insertar ó">ó</button>
+        <button type="button" class="tilde-btn" onmousedown="event.preventDefault()" onclick="insertAccent('ú')" aria-label="Insertar ú">ú</button>
+      </div>
+
+      <div id="ex2-list" class="dialogue-grid"></div>
+
+      <div class="exercise-footer">
+        <div class="exercise-controls">
+          <button type="button" class="btn btn-primary" onclick="checkExercise2()">Comprobar Ejercicio 2</button>
+          <button type="button" class="btn btn-secondary" id="ex2-retry-wrong" onclick="retryWrongExercise2()" hidden>Reintentar fallos</button>
+          <button type="button" class="btn btn-ghost" onclick="resetExercise2()">Reiniciar ejercicio</button>
+        </div>
+        <div id="ex2-result" class="result-banner" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- EJERCICIO 3: Elección múltiple -->
+    <section id="ejercicio-3" class="ink-block" aria-labelledby="title-ex3">
+      <div class="exercise-head">
+        <div class="exercise-title-group">
+          <span class="stamp">Ejercicio 3 de 3 · 9 puntos</span>
+          <h2 id="title-ex3" class="section-title">Elección múltiple: pares que se confunden</h2>
+          <p class="exercise-desc">
+            Elige la opción correcta en cada situación. Practica los contrastes más frecuentes: <strong>qué / cuál</strong>, <strong>por qué / para qué</strong> y <strong>quién / cuándo</strong>.
+          </p>
+        </div>
+        <span class="stamp stamp-outline" id="ex3-count-badge">0 / 9 elegidas</span>
+      </div>
+
+      <div id="ex3-list" class="mc-grid"></div>
+
+      <div class="exercise-footer">
+        <div class="exercise-controls">
+          <button type="button" class="btn btn-primary" onclick="checkExercise3()">Comprobar Ejercicio 3</button>
+          <button type="button" class="btn btn-secondary" id="ex3-retry-wrong" onclick="retryWrongExercise3()" hidden>Reintentar fallos</button>
+          <button type="button" class="btn btn-ghost" onclick="resetExercise3()">Reiniciar ejercicio</button>
+        </div>
+        <div id="ex3-result" class="result-banner" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Resumen de resultados -->
+    <section class="ink-block offset-blue" aria-labelledby="title-summary">
+      <div class="exercise-head">
+        <div class="exercise-title-group">
+          <span class="stamp stamp-yellow">Resumen global</span>
+          <h2 id="title-summary" class="section-title">Tu resultado por ejercicio</h2>
+          <p id="summary-message" class="exercise-desc">
+            Comprueba los ejercicios para ver tu puntuación final y tu porcentaje de aciertos en cada apartado.
+          </p>
+        </div>
+        <span class="tabular-num" id="summary-total-score" style="font-size: var(--headline-size);">0 / 27 puntos</span>
+      </div>
+
+      <div class="summary-bars">
+        <div class="bar-row">
+          <span class="label-mono">1. Relacionar</span>
+          <div class="bar-track" aria-hidden="true">
+            <div class="bar-fill series-1" id="bar-ex1"></div>
+          </div>
+          <span class="tabular-num" id="bar-ex1-label">—</span>
+        </div>
+        <div class="bar-row">
+          <span class="label-mono">2. Completar frases</span>
+          <div class="bar-track" aria-hidden="true">
+            <div class="bar-fill series-2" id="bar-ex2"></div>
+          </div>
+          <span class="tabular-num" id="bar-ex2-label">—</span>
+        </div>
+        <div class="bar-row">
+          <span class="label-mono">3. Elección múltiple</span>
+          <div class="bar-track" aria-hidden="true">
+            <div class="bar-fill series-3" id="bar-ex3"></div>
+          </div>
+          <span class="tabular-num" id="bar-ex3-label">—</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <api-shim></api-shim>
+
+  <script>
+    const EX1_ITEMS = [
+      {
+        id: `q1`,
+        question: `¿Quién?`,
+        answerId: `a1`,
+        answerText: `Mi mejor amigo, Carlos.`,
+        hint: `«Quién» pregunta siempre por la identidad de una persona.`
+      },
+      {
+        id: `q2`,
+        question: `¿Qué?`,
+        answerId: `a2`,
+        answerText: `Es una fruta tropical.`,
+        hint: `«Qué» se usa para preguntar por una definición, concepto o cosa.`
+      },
+      {
+        id: `q3`,
+        question: `¿Cómo?`,
+        answerId: `a3`,
+        answerText: `Muy bien, gracias.`,
+        hint: `«Cómo» pregunta por el modo, la manera o el estado de ánimo.`
+      },
+      {
+        id: `q4`,
+        question: `¿Cuándo?`,
+        answerId: `a4`,
+        answerText: `Mañana por la tarde.`,
+        hint: `«Cuándo» pregunta por el tiempo, la fecha o el momento.`
+      },
+      {
+        id: `q5`,
+        question: `¿Dónde?`,
+        answerId: `a5`,
+        answerText: `En el parque.`,
+        hint: `«Dónde» pregunta siempre por un lugar o ubicación.`
+      },
+      {
+        id: `q6`,
+        question: `¿Cuánto?`,
+        answerId: `a6`,
+        answerText: `Veinte euros.`,
+        hint: `«Cuánto» pregunta por una cantidad o por el precio de algo.`
+      },
+      {
+        id: `q7`,
+        question: `¿Cuál?`,
+        answerId: `a7`,
+        answerText: `El autobús número cinco.`,
+        hint: `«Cuál» sirve para seleccionar una opción concreta dentro de un grupo.`
+      },
+      {
+        id: `q8`,
+        question: `¿Por qué?`,
+        answerId: `a8`,
+        answerText: `Porque tengo un examen.`,
+        hint: `«Por qué» pregunta por la causa o el motivo y suele responderse con «porque».`
+      },
+      {
+        id: `q9`,
+        question: `¿Para qué?`,
+        answerId: `a9`,
+        answerText: `Para aprender a cocinar.`,
+        hint: `«Para qué» pregunta por la finalidad u objetivo y se responde con «para».`
+      }
+    ];
+
+    const EX2_ITEMS = [
+      {
+        id: `d1`,
+        context: `En la cafetería`,
+        before: `— Hola, buenos días. ¿`,
+        after: `cuesta un café con leche?`,
+        reply: `— Cuesta dos euros con cincuenta.`,
+        accepted: [`cuánto`],
+        unaccented: [`cuanto`],
+        hint: `La respuesta da un precio («dos euros con cincuenta»), así que pregunta por cantidad o precio: «cuánto».`
+      },
+      {
+        id: `d2`,
+        context: `Hablando de la familia`,
+        before: `— ¿`,
+        after: `vive tu hermana ahora?`,
+        reply: `— Vive en Valencia, cerca de la playa.`,
+        accepted: [`dónde`],
+        unaccented: [`donde`],
+        hint: `«En Valencia» indica un lugar. El interrogativo de lugar es «dónde».`
+      },
+      {
+        id: `d3`,
+        context: `En clase de español`,
+        before: `— Perdona, ¿`,
+        after: `significa la palabra «madrugada»?`,
+        reply: `— Significa las primeras horas de la mañana.`,
+        accepted: [`qué`],
+        unaccented: [`que`],
+        hint: `Para preguntar por el significado o definición de algo usamos «qué».`
+      },
+      {
+        id: `d4`,
+        context: `En la estación de tren`,
+        before: `— Disculpe, ¿`,
+        after: `sale el próximo tren a Sevilla?`,
+        reply: `— Sale a las cinco y media de la tarde.`,
+        accepted: [`cuándo`],
+        unaccented: [`cuando`],
+        hint: `La respuesta («a las cinco y media») indica un momento del día. Usamos «cuándo».`
+      },
+      {
+        id: `d5`,
+        context: `En una fiesta`,
+        before: `— ¿`,
+        after: `es esa chica de la chaqueta roja?`,
+        reply: `— Es Laura, mi compañera de piso.`,
+        accepted: [`quién`],
+        unaccented: [`quien`],
+        hint: `Preguntamos por la identidad de una persona («Laura»). Necesitas «quién».`
+      },
+      {
+        id: `d6`,
+        context: `Preparando una maleta`,
+        before: `— ¿`,
+        after: `necesitas una mochila tan grande?`,
+        reply: `— Para llevar toda mi ropa de invierno.`,
+        accepted: [`para qué`],
+        unaccented: [`para que`],
+        hint: `La respuesta empieza por «Para…» y expresa un objetivo o finalidad. Usamos «para qué».`
+      },
+      {
+        id: `d7`,
+        context: `Conversación diaria`,
+        before: `— ¿`,
+        after: `vas al trabajo todos los días?`,
+        reply: `— Normalmente voy en metro.`,
+        accepted: [`cómo`],
+        unaccented: [`como`],
+        hint: `«En metro» explica el medio o la manera de desplazarse. El interrogativo de modo es «cómo».`
+      },
+      {
+        id: `d8`,
+        context: `Gustos y preferencias`,
+        before: `— ¿`,
+        after: `son tus frutas favoritas?`,
+        reply: `— Las fresas y los plátanos.`,
+        accepted: [`cuáles`],
+        unaccented: [`cuales`],
+        hint: `Seleccionamos varias opciones y el verbo «son» y «tus frutas» están en plural: usa «cuáles».`
+      },
+      {
+        id: `d9`,
+        context: `En la oficina`,
+        before: `— ¿`,
+        after: `llegas tarde hoy?`,
+        reply: `— Porque había mucho tráfico en el centro.`,
+        accepted: [`por qué`],
+        unaccented: [`por que`, `porque`],
+        hint: `La respuesta empieza por «Porque…» y explica la causa o motivo. La pregunta se escribe separada y con tilde: «por qué».`
+      }
+    ];
+
+    const EX3_ITEMS = [
+      {
+        id: `m1`,
+        pairTag: `Qué vs. Cuál`,
+        question: `¿________ es la capital de España?`,
+        options: [`Qué`, `Cuál`, `Quién`],
+        correctIndex: 1,
+        hint: `Con el verbo «ser» para pedir un dato concreto (como una capital, un nombre o un número), se usa «cuál».`
+      },
+      {
+        id: `m2`,
+        pairTag: `Qué vs. Cuál`,
+        question: `¿________ estudias en la universidad?`,
+        options: [`Cuál`, `Qué`, `Cuáles`],
+        correctIndex: 1,
+        hint: `Para preguntar de forma abierta por una actividad o materia sin una lista cerrada, usamos «qué».`
+      },
+      {
+        id: `m3`,
+        pairTag: `Qué vs. Cuál`,
+        question: `De estas dos mochilas, ¿________ te gusta más?`,
+        options: [`cuál`, `qué`, `cuáles`],
+        correctIndex: 0,
+        hint: `Eliges una sola mochila entre dos opciones concretas: «cuál» en singular.`
+      },
+      {
+        id: `m4`,
+        pairTag: `Por qué vs. Para qué`,
+        question: `— ¿________ aprendes español? — Para viajar por Latinoamérica.`,
+        options: [`Por qué`, `Qué`, `Para qué`],
+        correctIndex: 2,
+        hint: `La respuesta indica un objetivo o meta («Para viajar…»). Por eso se pregunta con «para qué».`
+      },
+      {
+        id: `m5`,
+        pairTag: `Por qué vs. Para qué`,
+        question: `— ¿________ no vienes al cine con nosotros? — Porque tengo que trabajar.`,
+        options: [`Por qué`, `Para qué`, `Cuándo`],
+        correctIndex: 0,
+        hint: `La respuesta da una causa o razón («Porque tengo que trabajar»). Preguntamos con «por qué».`
+      },
+      {
+        id: `m6`,
+        pairTag: `Por qué vs. Para qué`,
+        question: `¿________ sirve este botón azul de la impresora?`,
+        options: [`Por qué`, `Para qué`, `Cuál`],
+        correctIndex: 1,
+        hint: `Cuando preguntamos por la utilidad o función de un objeto, usamos «para qué».`
+      },
+      {
+        id: `m7`,
+        pairTag: `Quién vs. Cuándo`,
+        question: `— ¿________ es tu cumpleaños? — El catorce de mayo.`,
+        options: [`Quién`, `Dónde`, `Cuándo`],
+        correctIndex: 2,
+        hint: `«El catorce de mayo» es una fecha; «cuándo» pregunta por el tiempo y «quién» pregunta por personas.`
+      },
+      {
+        id: `m8`,
+        pairTag: `Quién vs. Cuándo`,
+        question: `— ¿________ cocina hoy en casa? — Hoy cocina mi padre.`,
+        options: [`Quién`, `Cuándo`, `Cómo`],
+        correctIndex: 0,
+        hint: `La respuesta es una persona («mi padre»). Para preguntar por personas se usa «quién».`
+      },
+      {
+        id: `m9`,
+        pairTag: `Quién vs. Cuándo`,
+        question: `— ¿________ llegan tus abuelos? — Llegan mañana por la noche.`,
+        options: [`Quién`, `Cuándo`, `Por qué`],
+        correctIndex: 1,
+        hint: `«Mañana por la noche» expresa un momento temporal, así que el interrogativo correcto es «cuándo».`
+      }
+    ];
+
+    let appState = createDefaultState();
+    let selectedLeftId = null;
+    let selectedRightId = null;
+    let activeBlankId = `d1`;
+
+    function shuffleArray(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = temp;
+      }
+      return copy;
+    }
+
+    function createDefaultState() {
+      return {
+        ex1: {
+          rightOrder: shuffleArray(EX1_ITEMS.map(function (item) { return item.answerId; })),
+          matches: {},
+          checked: false
+        },
+        ex2: {
+          answers: {},
+          checked: false
+        },
+        ex3: {
+          answers: {},
+          checked: false
+        }
+      };
+    }
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (err) {
+          /* Persistencia no disponible en este entorno */
+        }
+      }
+    }
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && saved.ex1 && saved.ex2 && saved.ex3) {
+            appState = saved;
+          }
+        } catch (err) {
+          appState = createDefaultState();
+        }
+      }
+      renderAll();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    function renderAll() {
+      renderExercise1();
+      renderExercise2();
+      renderExercise3();
+      updateGlobalStats();
+    }
+
+    /* ======================== EJERCICIO 1 ======================== */
+
+    function getEx1ItemById(id) {
+      return EX1_ITEMS.find(function (item) { return item.id === id; }) || null;
+    }
+
+    function getEx1ItemByAnswerId(answerId) {
+      return EX1_ITEMS.find(function (item) { return item.answerId === answerId; }) || null;
+    }
+
+    function findQuestionForAnswer(answerId) {
+      const keys = Object.keys(appState.ex1.matches);
+      for (let i = 0; i < keys.length; i++) {
+        if (appState.ex1.matches[keys[i]] === answerId) {
+          return keys[i];
+        }
+      }
+      return null;
+    }
+
+    function updateMatchGuide(msg) {
+      const guide = document.getElementById('ex1-selection-guide');
+      if (guide) guide.textContent = msg;
+    }
+
+    function selectEx1Left(qId) {
+      if (selectedRightId) {
+        assignEx1Pair(qId, selectedRightId);
+        return;
+      }
+      selectedLeftId = (selectedLeftId === qId) ? null : qId;
+      if (selectedLeftId) {
+        const item = getEx1ItemById(selectedLeftId);
+        updateMatchGuide(`Has seleccionado ${item ? item.question : ''}. Ahora haz clic en su respuesta en la columna derecha.`);
+      } else {
+        updateMatchGuide(`Paso 1: Selecciona un interrogativo de la izquierda o una respuesta de la derecha para empezar a unirlos.`);
+      }
+      renderExercise1();
+    }
+
+    function selectEx1Right(answerId) {
+      if (selectedLeftId) {
+        assignEx1Pair(selectedLeftId, answerId);
+        return;
+      }
+      selectedRightId = (selectedRightId === answerId) ? null : answerId;
+      if (selectedRightId) {
+        const ansItem = getEx1ItemByAnswerId(selectedRightId);
+        updateMatchGuide(`Has seleccionado «${ansItem ? ansItem.answerText : ''}». Ahora haz clic en el interrogativo correspondiente a la izquierda.`);
+      } else {
+        updateMatchGuide(`Paso 1: Selecciona un interrogativo de la izquierda o una respuesta de la derecha para empezar a unirlos.`);
+      }
+      renderExercise1();
+    }
+
+    function assignEx1Pair(qId, answerId) {
+      const prevQuestion = findQuestionForAnswer(answerId);
+      if (prevQuestion && prevQuestion !== qId) {
+        delete appState.ex1.matches[prevQuestion];
+      }
+      appState.ex1.matches[qId] = answerId;
+      appState.ex1.checked = false;
+      selectedLeftId = null;
+      selectedRightId = null;
+      const qItem = getEx1ItemById(qId);
+      const aItem = getEx1ItemByAnswerId(answerId);
+      updateMatchGuide(`Pareja guardada: ${qItem ? qItem.question : ''} → ${aItem ? aItem.answerText : ''}.`);
+      renderExercise1();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function clearEx1Match(qId) {
+      delete appState.ex1.matches[qId];
+      appState.ex1.checked = false;
+      selectedLeftId = null;
+      selectedRightId = null;
+      updateMatchGuide(`Pareja eliminada. Puedes volver a elegir otra respuesta.`);
+      renderExercise1();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function renderExercise1() {
+      const leftCol = document.getElementById('ex1-left-col');
+      const rightCol = document.getElementById('ex1-right-col');
+      const countBadge = document.getElementById('ex1-count-badge');
+      const resultEl = document.getElementById('ex1-result');
+      const retryBtn = document.getElementById('ex1-retry-wrong');
+      if (!leftCol || !rightCol) return;
+
+      leftCol.innerHTML = '';
+      rightCol.innerHTML = '';
+
+      let matchedCount = 0;
+      let correctCount = 0;
+
+      EX1_ITEMS.forEach(function (item, index) {
+        const assignedAnswerId = appState.ex1.matches[item.id] || null;
+        if (assignedAnswerId) matchedCount++;
+        const assignedItem = assignedAnswerId ? getEx1ItemByAnswerId(assignedAnswerId) : null;
+        const isCorrect = appState.ex1.checked && assignedAnswerId === item.answerId;
+        const isWrong = appState.ex1.checked && assignedAnswerId && assignedAnswerId !== item.answerId;
+        const isUnanswered = appState.ex1.checked && !assignedAnswerId;
+        if (isCorrect) correctCount++;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'match-item-wrap';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        let cardClass = 'match-card';
+        if (selectedLeftId === item.id) cardClass += ' is-selected';
+        else if (isCorrect) cardClass += ' is-correct';
+        else if (isWrong) cardClass += ' is-incorrect';
+        else if (isUnanswered) cardClass += ' is-unanswered';
+        else if (assignedAnswerId) cardClass += ' is-paired';
+        btn.className = cardClass;
+        btn.setAttribute('aria-pressed', selectedLeftId === item.id ? 'true' : 'false');
+        btn.onclick = function () { selectEx1Left(item.id); };
+
+        const mainDiv = document.createElement('div');
+        mainDiv.className = 'match-q-main';
+
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'match-q-word';
+        wordSpan.textContent = `${index + 1}. ${item.question}`;
+        mainDiv.appendChild(wordSpan);
+
+        if (assignedItem) {
+          const ansPreview = document.createElement('span');
+          ansPreview.className = 'match-assigned-text';
+          ansPreview.textContent = `→ ${assignedItem.answerText}`;
+          mainDiv.appendChild(ansPreview);
+        }
+
+        const badge = document.createElement('span');
+        if (isCorrect) {
+          badge.className = 'status-pill pill-ok';
+          badge.textContent = 'Correcto';
+        } else if (isWrong) {
+          badge.className = 'status-pill pill-err';
+          badge.textContent = 'Incorrecto';
+        } else if (isUnanswered) {
+          badge.className = 'status-pill pill-warn';
+          badge.textContent = 'Sin unir';
+        } else if (assignedAnswerId) {
+          badge.className = 'match-badge badge-paired';
+          badge.textContent = 'Unida';
+        } else {
+          badge.className = 'match-badge';
+          badge.textContent = 'Sin pareja';
+        }
+
+        btn.appendChild(mainDiv);
+        btn.appendChild(badge);
+        wrap.appendChild(btn);
+
+        if (assignedAnswerId && !appState.ex1.checked) {
+          const clearBtn = document.createElement('button');
+          clearBtn.type = 'button';
+          clearBtn.className = 'match-clear-btn';
+          clearBtn.textContent = `Quitar pareja de ${item.question}`;
+          clearBtn.onclick = function () { clearEx1Match(item.id); };
+          wrap.appendChild(clearBtn);
+        }
+
+        if (appState.ex1.checked) {
+          const hint = document.createElement('div');
+          if (isCorrect) {
+            hint.className = 'hint-box hint-positive';
+            hint.textContent = `¡Muy bien! ${item.hint}`;
+          } else {
+            hint.className = isWrong ? 'hint-box hint-error' : 'hint-box hint-warning';
+            hint.textContent = `Pista: ${item.hint}`;
+          }
+          wrap.appendChild(hint);
+        }
+
+        leftCol.appendChild(wrap);
+      });
+
+      const rightLetters = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`];
+      appState.ex1.rightOrder.forEach(function (answerId, idx) {
+        const ansItem = getEx1ItemByAnswerId(answerId);
+        if (!ansItem) return;
+        const pairedQId = findQuestionForAnswer(answerId);
+        const pairedQ = pairedQId ? getEx1ItemById(pairedQId) : null;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        let rClass = 'match-card';
+        if (selectedRightId === answerId) rClass += ' is-selected';
+        else if (pairedQId) rClass += ' is-paired';
+        btn.className = rClass;
+        btn.setAttribute('aria-pressed', selectedRightId === answerId ? 'true' : 'false');
+        btn.onclick = function () { selectEx1Right(answerId); };
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = `${rightLetters[idx]}. ${ansItem.answerText}`;
+
+        const badge = document.createElement('span');
+        if (pairedQ) {
+          badge.className = 'match-badge badge-paired';
+          badge.textContent = pairedQ.question;
+        } else {
+          badge.className = 'match-badge';
+          badge.textContent = 'Disponible';
+        }
+
+        btn.appendChild(textSpan);
+        btn.appendChild(badge);
+        rightCol.appendChild(btn);
+      });
+
+      if (countBadge) countBadge.textContent = `${matchedCount} / ${EX1_ITEMS.length} unidas`;
+
+      if (resultEl && retryBtn) {
+        if (appState.ex1.checked) {
+          resultEl.hidden = false;
+          const pct = Math.round((correctCount / EX1_ITEMS.length) * 100);
+          resultEl.className = correctCount === EX1_ITEMS.length ? 'result-banner is-perfect' : 'result-banner';
+          resultEl.textContent = correctCount === EX1_ITEMS.length
+            ? `¡Excelente! ${correctCount} de ${EX1_ITEMS.length} aciertos (${pct}%).`
+            : `Has acertado ${correctCount} de ${EX1_ITEMS.length} (${pct}%). Lee las pistas e intenta corregir los fallos.`;
+          retryBtn.hidden = (correctCount === EX1_ITEMS.length);
+        } else {
+          resultEl.hidden = true;
+          retryBtn.hidden = true;
+        }
+      }
+    }
+
+    function checkExercise1() {
+      appState.ex1.checked = true;
+      selectedLeftId = null;
+      selectedRightId = null;
+      renderExercise1();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function retryWrongExercise1() {
+      EX1_ITEMS.forEach(function (item) {
+        if (appState.ex1.matches[item.id] !== item.answerId) {
+          delete appState.ex1.matches[item.id];
+        }
+      });
+      appState.ex1.checked = false;
+      selectedLeftId = null;
+      selectedRightId = null;
+      updateMatchGuide(`Se han limpiado las parejas incorrectas. Intenta completarlas de nuevo.`);
+      renderExercise1();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function resetExercise1() {
+      appState.ex1 = {
+        rightOrder: shuffleArray(EX1_ITEMS.map(function (item) { return item.answerId; })),
+        matches: {},
+        checked: false
+      };
+      selectedLeftId = null;
+      selectedRightId = null;
+      updateMatchGuide(`Ejercicio reiniciado. Selecciona un interrogativo y su respuesta.`);
+      renderExercise1();
+      updateGlobalStats();
+      persistState();
+    }
+
+    /* ======================== EJERCICIO 2 ======================== */
+
+    function normalizeSpanish(str) {
+      return (str || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function evaluateEx2Item(item, rawValue) {
+      const val = normalizeSpanish(rawValue);
+      if (!val) return 'empty';
+      if (item.accepted.indexOf(val) !== -1) return 'correct';
+      if (item.unaccented.indexOf(val) !== -1) return 'accent';
+      return 'wrong';
+    }
+
+    function handleEx2Input(id, value) {
+      appState.ex2.answers[id] = value;
+      if (appState.ex2.checked) {
+        appState.ex2.checked = false;
+        renderExercise2(false);
+      } else {
+        updateEx2Counter();
+      }
+      updateGlobalStats();
+      persistState();
+    }
+
+    function insertAccent(char) {
+      const input = document.getElementById(`blank-${activeBlankId}`);
+      if (!input) return;
+      const start = typeof input.selectionStart === 'number' ? input.selectionStart : input.value.length;
+      const end = typeof input.selectionEnd === 'number' ? input.selectionEnd : input.value.length;
+      const current = input.value;
+      const nextValue = current.slice(0, start) + char + current.slice(end);
+      input.value = nextValue;
+      input.focus();
+      if (typeof input.setSelectionRange === 'function') {
+        input.setSelectionRange(start + 1, start + 1);
+      }
+      handleEx2Input(activeBlankId, nextValue);
+    }
+
+    function updateEx2Counter() {
+      const badge = document.getElementById('ex2-count-badge');
+      if (!badge) return;
+      let filled = 0;
+      EX2_ITEMS.forEach(function (item) {
+        if (normalizeSpanish(appState.ex2.answers[item.id])) filled++;
+      });
+      badge.textContent = `${filled} / ${EX2_ITEMS.length} completadas`;
+    }
+
+    function renderExercise2(preserveFocus) {
+      const list = document.getElementById('ex2-list');
+      const resultEl = document.getElementById('ex2-result');
+      const retryBtn = document.getElementById('ex2-retry-wrong');
+      if (!list) return;
+
+      list.innerHTML = '';
+      let correctCount = 0;
+
+      EX2_ITEMS.forEach(function (item, idx) {
+        const val = appState.ex2.answers[item.id] || '';
+        const status = appState.ex2.checked ? evaluateEx2Item(item, val) : 'pending';
+        if (status === 'correct') correctCount++;
+
+        const card = document.createElement('div');
+        let cardCls = 'dialogue-card';
+        if (status === 'correct') cardCls += ' state-correct';
+        else if (status === 'accent' || status === 'empty') cardCls += ' state-warning';
+        else if (status === 'wrong') cardCls += ' state-error';
+        card.className = cardCls;
+
+        const labelRow = document.createElement('div');
+        labelRow.className = 'dialogue-label';
+
+        const labelEl = document.createElement('label');
+        labelEl.setAttribute('for', `blank-${item.id}`);
+        labelEl.textContent = `Diálogo ${idx + 1} · ${item.context}`;
+        labelRow.appendChild(labelEl);
+
+        if (appState.ex2.checked) {
+          const pill = document.createElement('span');
+          if (status === 'correct') {
+            pill.className = 'status-pill pill-ok';
+            pill.textContent = 'Correcto';
+          } else if (status === 'accent') {
+            pill.className = 'status-pill pill-warn';
+            pill.textContent = 'Falta la tilde';
+          } else if (status === 'empty') {
+            pill.className = 'status-pill pill-warn';
+            pill.textContent = 'Sin completar';
+          } else {
+            pill.className = 'status-pill pill-err';
+            pill.textContent = 'Incorrecto';
+          }
+          labelRow.appendChild(pill);
+        }
+
+        card.appendChild(labelRow);
+
+        const linesDiv = document.createElement('div');
+        linesDiv.className = 'dialogue-lines';
+
+        const line1 = document.createElement('p');
+        line1.className = 'dialogue-line';
+
+        const spkA = document.createElement('span');
+        spkA.className = 'speaker-tag';
+        spkA.textContent = 'A:';
+        line1.appendChild(spkA);
+
+        const beforeNode = document.createTextNode(item.before);
+        line1.appendChild(beforeNode);
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = `blank-${item.id}`;
+        input.className = 'blank-input';
+        input.value = val;
+        input.setAttribute('autocomplete', 'off');
+        input.setAttribute('spellcheck', 'false');
+        input.setAttribute('aria-label', `Interrogativo del diálogo ${idx + 1}: ${item.context}`);
+        input.onfocus = function () { activeBlankId = item.id; };
+        input.oninput = function (e) { handleEx2Input(item.id, e.target.value); };
+        line1.appendChild(input);
+
+        const afterNode = document.createTextNode(item.after);
+        line1.appendChild(afterNode);
+
+        const line2 = document.createElement('p');
+        line2.className = 'dialogue-line';
+        const spkB = document.createElement('span');
+        spkB.className = 'speaker-tag';
+        spkB.textContent = 'B:';
+        line2.appendChild(spkB);
+        line2.appendChild(document.createTextNode(item.reply));
+
+        linesDiv.appendChild(line1);
+        linesDiv.appendChild(line2);
+        card.appendChild(linesDiv);
+
+        if (appState.ex2.checked) {
+          const hint = document.createElement('div');
+          if (status === 'correct') {
+            hint.className = 'hint-box hint-positive';
+            hint.textContent = `¡Exacto! «${item.accepted[0]}» es correcto y lleva su tilde.`;
+          } else if (status === 'accent') {
+            hint.className = 'hint-box hint-warning';
+            hint.textContent = `¡Casi! Has elegido la palabra adecuada, pero los interrogativos siempre llevan tilde. Revisa dónde va el acento gráfico.`;
+          } else {
+            hint.className = status === 'wrong' ? 'hint-box hint-error' : 'hint-box hint-warning';
+            hint.textContent = `Pista: ${item.hint}`;
+          }
+          card.appendChild(hint);
+        }
+
+        list.appendChild(card);
+      });
+
+      updateEx2Counter();
+
+      if (preserveFocus && activeBlankId) {
+        const activeEl = document.getElementById(`blank-${activeBlankId}`);
+        if (activeEl) activeEl.focus();
+      }
+
+      if (resultEl && retryBtn) {
+        if (appState.ex2.checked) {
+          resultEl.hidden = false;
+          const pct = Math.round((correctCount / EX2_ITEMS.length) * 100);
+          resultEl.className = correctCount === EX2_ITEMS.length ? 'result-banner is-perfect' : 'result-banner';
+          resultEl.textContent = correctCount === EX2_ITEMS.length
+            ? `¡Fantástico! ${correctCount} de ${EX2_ITEMS.length} diálogos completos (${pct}%).`
+            : `Has completado bien ${correctCount} de ${EX2_ITEMS.length} (${pct}%). Revisa las pistas y las tildes.`;
+          retryBtn.hidden = (correctCount === EX2_ITEMS.length);
+        } else {
+          resultEl.hidden = true;
+          retryBtn.hidden = true;
+        }
+      }
+    }
+
+    function checkExercise2() {
+      appState.ex2.checked = true;
+      renderExercise2(false);
+      updateGlobalStats();
+      persistState();
+    }
+
+    function retryWrongExercise2() {
+      EX2_ITEMS.forEach(function (item) {
+        if (evaluateEx2Item(item, appState.ex2.answers[item.id]) !== 'correct') {
+          delete appState.ex2.answers[item.id];
+        }
+      });
+      appState.ex2.checked = false;
+      renderExercise2(false);
+      updateGlobalStats();
+      persistState();
+    }
+
+    function resetExercise2() {
+      appState.ex2 = { answers: {}, checked: false };
+      renderExercise2(false);
+      updateGlobalStats();
+      persistState();
+    }
+
+    /* ======================== EJERCICIO 3 ======================== */
+
+    function selectEx3Option(qId, optionIdx) {
+      appState.ex3.answers[qId] = optionIdx;
+      appState.ex3.checked = false;
+      renderExercise3();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function renderExercise3() {
+      const list = document.getElementById('ex3-list');
+      const countBadge = document.getElementById('ex3-count-badge');
+      const resultEl = document.getElementById('ex3-result');
+      const retryBtn = document.getElementById('ex3-retry-wrong');
+      if (!list) return;
+
+      list.innerHTML = '';
+      let chosenCount = 0;
+      let correctCount = 0;
+
+      EX3_ITEMS.forEach(function (item, idx) {
+        const chosenIdx = typeof appState.ex3.answers[item.id] === 'number' ? appState.ex3.answers[item.id] : null;
+        if (chosenIdx !== null) chosenCount++;
+
+        const isCorrect = appState.ex3.checked && chosenIdx === item.correctIndex;
+        const isWrong = appState.ex3.checked && chosenIdx !== null && chosenIdx !== item.correctIndex;
+        const isUnanswered = appState.ex3.checked && chosenIdx === null;
+        if (isCorrect) correctCount++;
+
+        const card = document.createElement('div');
+        let cardCls = 'mc-card';
+        if (isCorrect) cardCls += ' state-correct';
+        else if (isWrong) cardCls += ' state-error';
+        else if (isUnanswered) cardCls += ' state-warning';
+        card.className = cardCls;
+
+        const header = document.createElement('div');
+        header.className = 'mc-header';
+
+        const pairStamp = document.createElement('span');
+        pairStamp.className = 'stamp stamp-outline';
+        pairStamp.textContent = `${idx + 1}. ${item.pairTag}`;
+        header.appendChild(pairStamp);
+
+        if (appState.ex3.checked) {
+          const pill = document.createElement('span');
+          if (isCorrect) {
+            pill.className = 'status-pill pill-ok';
+            pill.textContent = 'Correcto';
+          } else if (isWrong) {
+            pill.className = 'status-pill pill-err';
+            pill.textContent = 'Incorrecto';
+          } else {
+            pill.className = 'status-pill pill-warn';
+            pill.textContent = 'Sin elegir';
+          }
+          header.appendChild(pill);
+        }
+
+        card.appendChild(header);
+
+        const qText = document.createElement('p');
+        qText.className = 'mc-question';
+        qText.textContent = item.question;
+        card.appendChild(qText);
+
+        const optsRow = document.createElement('div');
+        optsRow.className = 'mc-options';
+        optsRow.setAttribute('role', 'group');
+        optsRow.setAttribute('aria-label', `Opciones de la pregunta ${idx + 1}`);
+
+        item.options.forEach(function (optLabel, optIdx) {
+          const optBtn = document.createElement('button');
+          optBtn.type = 'button';
+          let btnCls = 'mc-option-btn';
+          const isSelected = chosenIdx === optIdx;
+
+          if (appState.ex3.checked) {
+            if (isSelected && optIdx === item.correctIndex) {
+              btnCls += ' is-correct-choice';
+            } else if (isSelected && optIdx !== item.correctIndex) {
+              btnCls += ' is-wrong-choice';
+            }
+          } else if (isSelected) {
+            btnCls += ' is-chosen';
+          }
+
+          optBtn.className = btnCls;
+          optBtn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+          optBtn.textContent = optLabel;
+          optBtn.onclick = function () { selectEx3Option(item.id, optIdx); };
+          optsRow.appendChild(optBtn);
+        });
+
+        card.appendChild(optsRow);
+
+        if (appState.ex3.checked) {
+          const hint = document.createElement('div');
+          if (isCorrect) {
+            hint.className = 'hint-box hint-positive';
+            hint.textContent = `¡Correcto! ${item.hint}`;
+          } else {
+            hint.className = isWrong ? 'hint-box hint-error' : 'hint-box hint-warning';
+            hint.textContent = `Pista: ${item.hint}`;
+          }
+          card.appendChild(hint);
+        }
+
+        list.appendChild(card);
+      });
+
+      if (countBadge) countBadge.textContent = `${chosenCount} / ${EX3_ITEMS.length} elegidas`;
+
+      if (resultEl && retryBtn) {
+        if (appState.ex3.checked) {
+          resultEl.hidden = false;
+          const pct = Math.round((correctCount / EX3_ITEMS.length) * 100);
+          resultEl.className = correctCount === EX3_ITEMS.length ? 'result-banner is-perfect' : 'result-banner';
+          resultEl.textContent = correctCount === EX3_ITEMS.length
+            ? `¡Perfecto! ${correctCount} de ${EX3_ITEMS.length} aciertos (${pct}%).`
+            : `Has acertado ${correctCount} de ${EX3_ITEMS.length} (${pct}%). Fíjate en el contraste que explica cada pista.`;
+          retryBtn.hidden = (correctCount === EX3_ITEMS.length);
+        } else {
+          resultEl.hidden = true;
+          retryBtn.hidden = true;
+        }
+      }
+    }
+
+    function checkExercise3() {
+      appState.ex3.checked = true;
+      renderExercise3();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function retryWrongExercise3() {
+      EX3_ITEMS.forEach(function (item) {
+        if (appState.ex3.answers[item.id] !== item.correctIndex) {
+          delete appState.ex3.answers[item.id];
+        }
+      });
+      appState.ex3.checked = false;
+      renderExercise3();
+      updateGlobalStats();
+      persistState();
+    }
+
+    function resetExercise3() {
+      appState.ex3 = { answers: {}, checked: false };
+      renderExercise3();
+      updateGlobalStats();
+      persistState();
+    }
+
+    /* ======================== RESUMEN Y REINICIO GLOBAL ======================== */
+
+    function updateGlobalStats() {
+      let ex1Answered = 0;
+      let ex1Correct = 0;
+      EX1_ITEMS.forEach(function (item) {
+        if (appState.ex1.matches[item.id]) ex1Answered++;
+        if (appState.ex1.checked && appState.ex1.matches[item.id] === item.answerId) ex1Correct++;
+      });
+
+      let ex2Answered = 0;
+      let ex2Correct = 0;
+      EX2_ITEMS.forEach(function (item) {
+        if (normalizeSpanish(appState.ex2.answers[item.id])) ex2Answered++;
+        if (appState.ex2.checked && evaluateEx2Item(item, appState.ex2.answers[item.id]) === 'correct') ex2Correct++;
+      });
+
+      let ex3Answered = 0;
+      let ex3Correct = 0;
+      EX3_ITEMS.forEach(function (item) {
+        if (typeof appState.ex3.answers[item.id] === 'number') ex3Answered++;
+        if (appState.ex3.checked && appState.ex3.answers[item.id] === item.correctIndex) ex3Correct++;
+      });
+
+      const totalItems = EX1_ITEMS.length + EX2_ITEMS.length + EX3_ITEMS.length;
+      const totalAnswered = ex1Answered + ex2Answered + ex3Answered;
+      const totalScore = ex1Correct + ex2Correct + ex3Correct;
+
+      const progText = document.getElementById('global-progress-text');
+      const progBar = document.getElementById('global-progress-bar');
+      const progFill = document.getElementById('global-progress-fill');
+      if (progText) progText.textContent = `${totalAnswered} / ${totalItems} respondidas`;
+      if (progBar) progBar.setAttribute('aria-valuenow', String(totalAnswered));
+      if (progFill) progFill.style.width = `${Math.round((totalAnswered / totalItems) * 100)}%`;
+
+      updateMiniTile('tile-ex1', 'tile-ex1-val', appState.ex1.checked, ex1Correct, EX1_ITEMS.length);
+      updateMiniTile('tile-ex2', 'tile-ex2-val', appState.ex2.checked, ex2Correct, EX2_ITEMS.length);
+      updateMiniTile('tile-ex3', 'tile-ex3-val', appState.ex3.checked, ex3Correct, EX3_ITEMS.length);
+
+      updateBar('bar-ex1', 'bar-ex1-label', appState.ex1.checked, ex1Correct, EX1_ITEMS.length);
+      updateBar('bar-ex2', 'bar-ex2-label', appState.ex2.checked, ex2Correct, EX2_ITEMS.length);
+      updateBar('bar-ex3', 'bar-ex3-label', appState.ex3.checked, ex3Correct, EX3_ITEMS.length);
+
+      const summaryScore = document.getElementById('summary-total-score');
+      const summaryMsg = document.getElementById('summary-message');
+      if (summaryScore) summaryScore.textContent = `${totalScore} / ${totalItems} puntos`;
+
+      if (summaryMsg) {
+        const allChecked = appState.ex1.checked && appState.ex2.checked && appState.ex3.checked;
+        if (!appState.ex1.checked && !appState.ex2.checked && !appState.ex3.checked) {
+          summaryMsg.textContent = `Comprueba los ejercicios para ver tu puntuación final y tu porcentaje de aciertos en cada apartado.`;
+        } else if (allChecked && totalScore === totalItems) {
+          summaryMsg.textContent = `¡Enhorabuena! Has conseguido la puntuación máxima en todos los ejercicios de interrogativos.`;
+        } else if (allChecked) {
+          summaryMsg.textContent = `Has completado los tres ejercicios con ${totalScore} de ${totalItems} puntos. Usa «Reintentar fallos» en cualquier apartado para mejorar tu nota.`;
+        } else {
+          summaryMsg.textContent = `Llevas ${totalScore} puntos comprobados. ¡Termina y comprueba los demás ejercicios para completar tu práctica!`;
+        }
+      }
+    }
+
+    function updateMiniTile(tileId, valId, isChecked, score, max) {
+      const tile = document.getElementById(tileId);
+      const val = document.getElementById(valId);
+      if (!tile || !val) return;
+      if (isChecked) {
+        val.textContent = `${score} / ${max}`;
+        if (score === max) tile.classList.add('is-complete');
+        else tile.classList.remove('is-complete');
+      } else {
+        val.textContent = 'Sin comprobar';
+        tile.classList.remove('is-complete');
+      }
+    }
+
+    function updateBar(barId, labelId, isChecked, score, max) {
+      const bar = document.getElementById(barId);
+      const label = document.getElementById(labelId);
+      if (!bar || !label) return;
+      if (isChecked) {
+        const pct = Math.round((score / max) * 100);
+        bar.style.width = `${pct}%`;
+        label.textContent = `${pct}% (${score}/${max})`;
+      } else {
+        bar.style.width = '0%';
+        label.textContent = 'Pendiente';
+      }
+    }
+
+    function handleResetAll(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== 'true') {
+        btn.dataset.armed = 'true';
+        btn.classList.add('btn-danger-armed');
+        btn.textContent = '¿Seguro? Haz clic otra vez';
+        setTimeout(function () {
+          if (btn.dataset.armed === 'true') {
+            btn.dataset.armed = 'false';
+            btn.classList.remove('btn-danger-armed');
+            btn.textContent = 'Reiniciar todo';
+          }
+        }, 4000);
+        return;
+      }
+      btn.dataset.armed = 'false';
+      btn.classList.remove('btn-danger-armed');
+      btn.textContent = 'Reiniciar todo';
+      appState = createDefaultState();
+      selectedLeftId = null;
+      selectedRightId = null;
+      updateMatchGuide(`Paso 1: Selecciona un interrogativo de la izquierda o una respuesta de la derecha para empezar a unirlos.`);
+      renderAll();
+      persistState();
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
